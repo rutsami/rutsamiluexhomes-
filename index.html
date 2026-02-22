@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutsami Luex Homes | Luxury Lagos Rentals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --brown: #8B5E3C;
+            --milk: #F5F5DC;
+            --glass: rgba(0, 0, 0, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.18);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body { 
+            background-color: var(--black); 
+            color: var(--milk); 
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Fixed Navigation Header */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            display: flex; justify-content: center; padding: 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+        .logo {
+            width: 150px;
+            filter: drop-shadow(0px 10px 12px rgba(0,0,0,0.9)) contrast(1.1);
+        }
+
+        /* Liquid Glass Component */
+        .liquid-glass {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Menu Overlay System */
+        #menuOverlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.97); z-index: 3000;
+            flex-direction: column; align-items: center; justify-content: center;
+        }
+        .menu-link {
+            font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--brown);
+            text-decoration: none; margin: 15px 0; transition: 0.3s;
+        }
+
+        /* Floating Navigation Toggle */
+        .fab-menu {
+            position: fixed; bottom: 30px; right: 25px; width: 65px; height: 65px;
+            background: var(--brown); border: 2px solid var(--glass-border);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            z-index: 4000; box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            color: white; font-size: 28px; font-weight: bold;
+        }
+
+        /* Home Section & Video */
+        #home {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative;
+        }
+        #hero-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; object-fit: cover; filter: brightness(40%);
+        }
+
+        /* Property Gallery Grid */
+        #properties { padding: 120px 20px 60px; text-align: center; }
+        .section-title { font-family: 'Playfair Display'; color: var(--brown); font-size: 2.2rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+        .grid { display: grid; gap: 20px; }
+        .prop-card {
+            position: relative; height: 300px; border-radius: 20px;
+            overflow: hidden; border: 1px solid var(--glass-border);
+            cursor: pointer;
+        }
+        .prop-card img { width: 100%; height: 100%; object-fit: cover; }
+        .prop-label {
+            position: absolute; bottom: 0; width: 100%;
+            background: rgba(0,0,0,0.8); padding: 18px; font-weight: 600;
+        }
+
+        /* Info Modal (Popup) */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 5000; background: rgba(0,0,0,0.94);
+            justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-content { width: 100%; max-width: 450px; text-align: left; }
+        .modal-img { width: 100%; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--brown); }
+
+        /* Section Background Handling */
+        .pic-bg-section { 
+            padding: 100px 20px; 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+        }
+
+        /* Forms & Buttons */
+        input, select {
+            width: 100%; padding: 16px; margin: 10px 0;
+            background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border);
+            color: white; border-radius: 12px; font-size: 1rem;
+        }
+        .btn-book {
+            background: var(--brown); color: white; border: none; padding: 20px;
+            width: 100%; border-radius: 12px; font-weight: bold; text-transform: uppercase;
+            letter-spacing: 1px; margin-top: 15px;
+        }
+
+        footer { padding: 40px 20px; text-align: center; background: #000; font-size: 0.8rem; opacity: 0.5; }
+    </style>
+</head>
+<body>
+
+    <div id="menuOverlay">
+        <a href="#home" class="menu-link" onclick="toggleMenu()">Home</a>
+        <a href="#properties" class="menu-link" onclick="toggleMenu()">Residences</a>
+        <a href="#amenities" class="menu-link" onclick="toggleMenu()">Lifestyle</a>
+        <a href="#booking" class="menu-link" onclick="toggleMenu()">Book a Stay</a>
+        <a href="#contact" class="menu-link" onclick="toggleMenu()">Contact</a>
+    </div>
+
+    <div class="fab-menu" onclick="toggleMenu()">☰</div>
+
+    <nav>
+        <img src="Gemini_Generated_Image_6ov94r6ov94r6ov9-removebg-preview.png" class="logo" alt="Rutsami Luex">
+    </nav>
+
+    <section id="home">
+        <video autoplay muted loop playsinline id="hero-video">
+            <source src="521ddfb3-a426-4e87-90f2-3e3c80193fa9.mov" type="video/mp4">
+        </video>
+        <div class="liquid-glass" style="margin: 0 20px;">
+            <h1 style="font-family: 'Playfair Display'; color: var(--brown); font-size: 2.1rem;">Rutsami Luxe Homes</h1>
+            <p style="margin-top: 10px; font-size: 1.1rem;">Where luxury meets comfort</p>
+            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.8; line-height: 1.6;">
+                Premium service apartments for executives, singles and families in the heart of Lagos.
+            </p>
+        </div>
+    </section>
+
+    <section id="properties">
+        <h2 class="section-title">Our Residences</h2>
+        <div class="grid">
+            <div class="prop-card" onclick="openModal('studio')">
+                <img src="57d244b6-e93e-4bce-8c27-01cfd4bdd2a9.JPG">
+                <div class="prop-label">The Oasis Studio</div>
+            </div>
+            <div class="prop-card" onclick="openModal('onebed')">
+                <img src="e7a692e8-f9e7-4d26-80fd-7a86b1e74fdb.JPG">
+                <div class="prop-label">✨ Posh ✨ 1-Bedroom</div>
+            </div>
+            <div class="prop-card" onclick="openModal('twobed')">
+                <img src="PIC 1.jpg">
+                <div class="prop-label">💥 The Lush 💥 2-Bedroom</div>
+            </div>
+            <div class="prop-card" onclick="openModal('threebed')">
+                <img src="7f73ec38-d5c5-455b-8a5c-a7106b8f39c0.JPG">
+                <div class="prop-label">MAISON FOUR 3/4 Bedroom</div>
+            </div>
+        </div>
+        
+        <div class="liquid-glass" style="margin-top: 40px; font-size: 0.9rem; font-weight: 300;">
+            <p style="margin-bottom:10px">📅 Short-term and long-term rental options</p>
+            <p style="margin-bottom:10px">🛋️ Furnished and unfurnished options</p>
+            <p>🏊 Gym, pool, security, and private parking</p>
+        </div>
+    </section>
+
+    <div id="infoModal" class="modal" onclick="closeModal()">
+        <div class="modal-content liquid-glass" onclick="event.stopPropagation()">
+            <img id="modalImg" class="modal-img" src="">
+            <div id="modalText"></div>
+            <button onclick="closeModal()" class="btn-book" style="background: transparent; border: 1px solid var(--brown);">Return</button>
+        </div>
+    </div>
+
+    <section id="amenities" class="pic-bg-section" style="background-image: url('PIC 3.jpeg');">
+        <div class="liquid-glass" style="text-align: center;">
+            <h2 class="section-title" style="font-size: 1.8rem;">Bespoke Living</h2>
+            <p>Experience 24/7 power, elite security, and ultra-modern finishes in Lagos' most prestigious neighborhoods.</p>
+        </div>
+    </section>
+
+    <section id="booking" class="pic-bg-section" style="background-image: url('rusami.jpg');">
+        <div class="liquid-glass">
+            <h2 class="section-title" style="font-size: 1.8rem;">Reservations</h2>
+            <input type="text" id="guestName" placeholder="Full Name">
+            <select id="aptChoice">
+                <option>The Oasis Studio</option>
+                <option>✨ Posh ✨ 1-Bedroom</option>
+                <option>💥 The Lush 💥 2-Bedroom</option>
+                <option>MAISON FOUR 3/4 Bedroom</option>
+            </select>
+            <input type="date" id="guestDate">
+            <button class="btn-book" onclick="sendWhatsApp()">Confirm via WhatsApp</button>
+        </div>
+    </section>
+
+    <section id="contact" class="pic-bg-section" style="background-image: url('ab8f5053-e481-4818-9dcb-5cab6ce28600.JPG');">
+        <div class="liquid-glass" style="text-align: center;">
+            <h2 class="section-title">Inquiries</h2>
+            <p>📞 +234 07049870341</p>
+            <p>✉️ rutsamiluexhomes@gmail.com</p>
+            <a href="https://wa.me/2347049870341" style="background: #25D366; color:white; padding: 18px; border-radius: 12px; display: block; margin-top: 30px; text-decoration: none; font-weight: 600;">
+                WHATSAPP CHAT
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 RUTSAMI LUEX HOMES LAGOS
+    </footer>
+
+    <script>
+        const propertyData = {
+            studio: {
+                img: '57d244b6-e93e-4bce-8c27-01cfd4bdd2a9.JPG',
+                text: '<h3 style="color:var(--brown)">The Oasis Studio</h3><br>Style and sophistication in Banana Island.<br><br>• Kitchen & Modern Bath<br>• Workstation & 5G Internet<br>• Pool & Supermarket Access<br><br>💰 <b>Caution: ₦50,000</b>'
+            },
+            onebed: {
+                img: 'e7a692e8-f9e7-4d26-80fd-7a86b1e74fdb.JPG',
+                text: '<h3 style="color:var(--brown)">✨ Posh ✨</h3><br>Lekki Phase 1 Luxury.<br><br>• PS5 (Request) & Netflix<br>• High-speed WiFi<br>• 24/7 Uninterrupted Power<br><br>💰 <b>Caution: ₦100,000</b>'
+            },
+            twobed: {
+                img: 'PIC 1.jpg',
+                text: '<h3 style="color:var(--brown)">💥 The Lush 💥</h3><br>Brand new Maisonnette in Ikate.<br><br>• Swimming Pool<br>• PS5 & Snooker Board<br>• Balcony Access<br><br>💰 <b>Caution: ₦100,000</b>'
+            },
+            threebed: {
+                img: '7f73ec38-d5c5-455b-8a5c-a7106b8f39c0.JPG',
+                text: '<h3 style="color:var(--brown)">MAISON FOUR</h3><br>Premium 3/4 Bedroom in Chevron.<br><br>• PS5 + Snooker + Wifi<br>• 24 Hours Power Supply<br>• Secure Environment<br><br>💰 <b>Caution: ₦100,000</b>'
+            }
+        };
+
+        function toggleMenu() {
+            const menu = document.getElementById('menuOverlay');
+            menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function openModal(type) {
+            document.getElementById('modalImg').src = propertyData[type].img;
+            document.getElementById('modalText').innerHTML = propertyData[type].text;
+            document.getElementById('infoModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        function sendWhatsApp() {
+            const name = document.getElementById('guestName').value;
+            const apt = document.getElementById('aptChoice').value;
+            const date = document.getElementById('guestDate').value;
+            if(!name || !date) { alert('Please fill in your details'); return; }
+            const msg = `Hello Rutsami Luex Homes, I would like to book:%0AName: ${name}%0AApartment: ${apt}%0ADate: ${date}`;
+            window.open(`https://wa.me/2347049870341?text=${msg}`, '_blank');
+        }
+    </script>
+</body>
+</html>
